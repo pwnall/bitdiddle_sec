@@ -1,0 +1,17 @@
+identity:
+  material: <%= {:p1 => (0...128).to_a, :p2 => (0...128).to_a, :s => (0...256).to_a}.to_yaml.inspect %>
+  source_ip: 18.0.0.1
+  calls_left: 500
+  uid: "01234567"
+
+reverse:
+  material: <%= {:p1 => (0...128).to_a.reverse, :p2 => (0...128).to_a, :s => (0...256).to_a}.to_yaml.inspect %>
+  source_ip: 18.0.0.1
+  calls_left: 500
+  uid: "76543210"
+
+blow_up:
+  material: <%= {:p1 => (0...128).to_a, :p2 => (0...128).to_a, :s => (0...256).to_a}.to_yaml.inspect %>
+  source_ip: 127.0.0.1
+  calls_left: 0
+  uid: "ABCDEF89"

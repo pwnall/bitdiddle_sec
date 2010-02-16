@@ -1,0 +1,12 @@
+<html>
+	<head>
+		<title>Successful Teams</title>
+	</head>
+	<body>
+		<h1>Successful Teams</h1>
+		
+		<% @victories.each do |victory| %>
+		  <p><%= victory.team_name%> at <%= victory.created_at %></p>
+		<% end %>
+	</body>
+</html>
