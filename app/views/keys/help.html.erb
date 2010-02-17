@@ -87,10 +87,10 @@ $ curl -X GET <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
 			<code>Nope</code>.
 		</p>
 		<p>
-			Example (<%= link_to 'i128 input file', '/i128.txt' %>,
-			<%= link_to 'i256 input file', '/i256.txt' %>):
+			Example (<%= link_to 'i128.txt input file', '/i128.txt' %>,
+			<%= link_to 'i256.txt input file', '/i256.txt' %>):
       <pre>
-$ curl -X DELETE -d team=1 --data-urlencode p=@i128 --data-urlencode q=@i128 --data-urlencode s=@i256 <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
+$ curl -X DELETE -d team=1 --data-urlencode p@i128.txt --data-urlencode q@i128.txt --data-urlencode s@i256.txt <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
 Nope</pre>
 		</p>
 		
