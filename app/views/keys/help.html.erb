@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MIT 6.857: Bitdiddle Encryption Standard</title>
+  </head>
+  <body>
+    <h1>MIT 6.857: Bitdiddle Encryption Standard</h1>
+    <p>
+      This server provides a REST-like API for the exercise of attacking
+      Bitdiddle's Encryption Standard.
+    </p>
+    <p>
+      To complete the exercise, a team will have to break a
+      randomly-generated encryption key. Teams are allowed to create multiple
+      keys (for debugging purposes). However, once a key is created, it can only
+      be used for encryption 1,000 times.
+    </p>
+        
+    <h2>1. Create a Key</h2>
+    <p>
+      Issue a HTTP POST to <code><%= keys_url %></code>
+    </p>
+		<p>
+			The response will contain the key ID that you will use in future requests.
+		</p>
+		<p>
+			Example:
+			<pre>
+$ curl -X POST -d "" <%= keys_url %>
+af75f15adbebd764b35e34d930f8fb7a</pre>
+		</p>
+    
+    <h2>2. Encrypt Chosen Plaintexts</h2>
+    <p>
+      Encrypting takes a 16-byte block and outputs a 16-byte block. The blocks
+      are passed via HTTP using hex-encoding (for example, <em>ABCD</em> is
+			encoded as <em><%= "ABCD".unpack('H*') %></em>). Remember that you can
+			only encrypt with a key 1,000 times.
+    </p>
+		<p>
+      To encrypt, issue a HTTP PUT to
+			<code><%= key_url :id => 'your_key_id' %></code>
+			Pass the hex-encoded block as the value for the HTTP form field named
+			<code>block</code>. Use the standard <q>percent encoding</q>
+			(application/x-www-form-urlencoded).
+    </p>
+		<p>The response will contain the hex-encrypted block.</p>
+    <p>
+      Example:
+      <pre>
+$ curl -X PUT -d "block=41424344414243444142434441424344" <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
+593cc654d9529ecbc299ad84a74720ae</pre>
+    </p>
+		
+		<h2>3. Obtain Key Status</h2>
+		<p>
+			To find out how many encryptions you have left for this key, issue a HTTP
+			GET to <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
+		</p>
+		<p>
+			Example:
+      <pre>
+$ curl -X GET <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
+999</pre>			
+		</p>
+			
+		
+		<h2>4. Claim Victory</h2>
+		<p>
+			Once you've figured out the encryption key, you need to prove that by
+			submitting the 2 permutations <em>p</em> and <em>q</em>, and the contents
+			of the S-box <em>s</em>. Permutation (and implitly the S-box) are 
+			specified in decimal, separated by single commas (<em>,</em>). Remember
+			that permutation values are 0-based, so the identity permutation would be
+			specified as <code>0,1,2,...,127</code>
+		</p>
+		<p>
+			To submit a key, issue a HTTP DESTROY to
+			<code><%= key_url(:id => 'your_key_id') %></code>
+			Pass the permutations and S-box as the values for the HTTP form field
+			named <code>p</code>, <code>q</code>, and <code>s</code>. Pass your team
+			name as the value for the <code>team</code> HTTP form field.  Use the
+			standard <q>percent encoding</q> (application/x-www-form-urlencoded).
+		</p>
+		<p>
+			The response will either contain the string <code>OK</code> or the string
+			<code>Nope</code>.
+		</p>
+		<p>
+			Example (<%= link_to 'i128 input file', '/i128.txt' %>,
+			<%= link_to 'i256 input file', '/i256.txt' %>):
+      <pre>
+$ curl -X DELETE -d team=1 --data-urlencode p=@i128 --data-urlencode q=@i128 --data-urlencode s=@i256 <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
+Nope</pre>
+		</p>
+		
+		
+		<h2>5. Confirm Victory</h2>
+		<p>
+			After having broken a key successfully, go to
+			<%= link_to keys_url, keys_url %> to confirm that your team appears on the
+			list.
+		</p>
+		
+		<h2>6. Incorrect Inputs</h2>
+		<p>
+			The server's behavior is unspecified if you don't behave according to this
+			protocol. You may receive HTTP 404 or 500 errors. Please do not abuse the
+			server.
+		</p>
+  </body>
+</html>

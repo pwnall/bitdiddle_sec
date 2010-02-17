@@ -44,8 +44,8 @@ class KeysControllerTest < ActionController::TestCase
   test "should accept equivalent key" do
     key = keys(:identity)
     assert_difference('Key.count', -1) do
-      delete :destroy, :id => key.uid, :p1 => key.material[:p1].join(','),
-                       :p2 => key.material[:p2].join(','),
+      delete :destroy, :id => key.uid, :p => key.material[:p1].join(','),
+                       :q => key.material[:p2].join(','),
                        :s => key.material[:s].join(','),
                        :team => 'Team Awesome'
     end
@@ -61,8 +61,8 @@ class KeysControllerTest < ActionController::TestCase
     rkey = keys(:reverse)
     key = keys(:identity)
     assert_difference('Key.count', -1) do
-      delete :destroy, :id => rkey.uid, :p1 => key.material[:p1].join(','),
-                       :p2 => key.material[:p2].join(','),
+      delete :destroy, :id => rkey.uid, :p => key.material[:p1].join(','),
+                       :q => key.material[:p2].join(','),
                        :s => key.material[:s].join(','),
                        :team => 'Team Awesome'
     end

@@ -16,7 +16,7 @@ class KeysController < ApplicationController
   def show
     @key = Key.find_by_uid params[:id]
     unless @key
-      render :text => 'No such key', :status => 404
+      render :text => "No such key\n", :status => 404
       return      
     end
   end
@@ -26,7 +26,7 @@ class KeysController < ApplicationController
     @key = Key.find_by_uid params[:id]
     @encrypted = @key && @key.encrypt([params[:block]].pack('H*'))
     unless @encrypted
-      render :text => 'No such key', :status => 404
+      render :text => "No such key\n", :status => 404
       return      
     end    
   end
@@ -35,12 +35,12 @@ class KeysController < ApplicationController
   def destroy
     @key = Key.find_by_uid params[:id]
     unless @key
-      render :text => 'No such key', :status => 404
+      render :text => "No such key\n", :status => 404
       return      
     end
     
-    p1 = params[:p1].split(',').map(&:to_i)[0, 128]
-    p2 = params[:p1].split(',').map(&:to_i)[0, 128]
+    p1 = params[:p].split(',').map(&:to_i)[0, 128]
+    p2 = params[:q].split(',').map(&:to_i)[0, 128]
     s = params[:s].split(',').map(&:to_i)[0, 256]
     @candidate_key = Bes.new :p1 => p1, :p2 => p2, :s => s
     
