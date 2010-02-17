@@ -23,8 +23,8 @@ ActiveRecord::Schema.define(:version => 20100216203632) do
   add_index "keys", ["uid"], :name => "index_keys_on_uid", :unique => true
 
   create_table "victories", :force => true do |t|
-    t.string   "source_ip"
-    t.string   "team_name"
+    t.string   "source_ip",  :limit => 256, :null => false
+    t.string   "team_name",  :limit => 256, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
