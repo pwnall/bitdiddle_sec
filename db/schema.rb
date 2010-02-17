@@ -12,10 +12,10 @@
 ActiveRecord::Schema.define(:version => 20100216203632) do
 
   create_table "keys", :force => true do |t|
-    t.string   "uid",        :limit => 64,   :null => false
-    t.text     "material",   :limit => 4096, :null => false
-    t.string   "source_ip",  :limit => 256,  :null => false
-    t.integer  "calls_left",                 :null => false
+    t.string   "uid",        :limit => 64,  :null => false
+    t.text     "material",                  :null => false
+    t.string   "source_ip",  :limit => 256, :null => false
+    t.integer  "calls_left",                :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
