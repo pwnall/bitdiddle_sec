@@ -69,13 +69,17 @@ $ curl -X GET <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
 		<p>
 			Once you've figured out the encryption key, you need to prove that by
 			submitting the 2 permutations <em>p</em> and <em>q</em>, and the contents
-			of the S-box <em>s</em>. Permutation (and implitly the S-box) are 
+			of the S-box <em>s</em>. Permutation (and implicitly the S-box) are 
 			specified in decimal, separated by single commas (<em>,</em>). Remember
 			that permutation values are 0-based, so the identity permutation would be
 			specified as <code>0,1,2,...,127</code>
 		</p>
 		<p>
-			To submit a key, issue a HTTP DESTROY to
+			You only have one chance to guess a key. If your guess is incorrect, you
+			have to re-start the process from step 1.
+		</p>
+		<p>
+			To submit a key, issue a HTTP DELETE to
 			<code><%= key_url(:id => 'your_key_id') %></code>
 			Pass the permutations and S-box as the values for the HTTP form field
 			named <code>p</code>, <code>q</code>, and <code>s</code>. Pass your team
@@ -88,9 +92,10 @@ $ curl -X GET <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
 		</p>
 		<p>
 			Example (<%= link_to 'i128.txt input file', '/i128.txt' %>,
+			<%= link_to 'r128.txt input file', '/r128.txt' %>
 			<%= link_to 'i256.txt input file', '/i256.txt' %>):
       <pre>
-$ curl -X DELETE -d team=1 --data-urlencode p@i128.txt --data-urlencode q@i128.txt --data-urlencode s@i256.txt <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
+$ curl -X DELETE -d team=1 --data-urlencode p@i128.txt --data-urlencode q@r128.txt --data-urlencode s@i256.txt <%= key_url :id => 'af75f15adbebd764b35e34d930f8fb7a' %>
 Nope</pre>
 		</p>
 		
