@@ -1,30 +1,24 @@
-# Edit this Gemfile to bundle your application's dependencies.
-source 'http://gemcutter.org'
+source 'http://rubygems.org'
 
-gem "rails", "3.0.0.beta"
+gem 'rails', '>= 3.2.2.rc1'
 
-## Bundle edge rails:
-#gem "rails", :git => "git://github.com/rails/rails.git"
+# Bundle edge Rails instead:
+# gem 'rails', :git => 'git://github.com/rails/rails.git',
+#              :branch => '3-0-stable'
+gem 'mysql2', '>= 0.3.11'
+gem 'sqlite3', '>= 1.3.5'
 
-# ActiveRecord requires a database adapter. By default,
-# Rails has selected sqlite3.
-group :development do
-  gem "sqlite3-ruby", :require => "sqlite3"
+# Gems used only for assets and not required
+# in production environments by default.
+group :assets do
+  gem 'sass-rails', '>= 3.2.3'
+  gem 'coffee-rails', '>= 3.2.1'
+  gem 'uglifier'
+  
+  gem 'therubyracer', '>= 0.9.10'
 end
-group :test do
-  gem "sqlite3-ruby", :require => "sqlite3"
-end
 
-gem "postgres", :group => :production
+gem 'jquery-rails', '>= 2.0.0'
 
-## Bundle the gems you use:
-# gem "bj"
-# gem "hpricot", "0.6"
-# gem "sqlite3-ruby", :require => "sqlite3"
-# gem "aws-s3", :require => "aws/s3"
-
-## Bundle gems used only in certain environments:
-# gem "rspec", :group => :test
-# group :test do
-#   gem "webrat"
-# end
+gem 'pg', :group => :production
+gem 'thin'

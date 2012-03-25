@@ -2,6 +2,6 @@
 
 # Your secret key for verifying the integrity of signed cookies.
 # If you change this key, all old signed cookies will become invalid!
-# Make sure the secret is at least 30 characters and all random, 
+# Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
-ActionController::Base.cookie_verifier_secret = '91299215c51cdf0c38a09386514b745f16b9eb13b62bed5ddd93452256760bf4005947b0c697d000d42e8b424f557bfee1bf7c5be427264fde5f859fa39e5445'
+BitdiddleSec::Application.config.secret_token = '35bd8014f5b6aa9a262791338a1d3164d0af2599b5a762c359012d008758a5561e0505c7ca95676c9047bfee374080524a5ac1f99b3265e6fdbb283730cdf8f1'
